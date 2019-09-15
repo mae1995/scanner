@@ -2,10 +2,10 @@
 
 class Scanner:
 
-    def __init__(self):
-        pass
+    def __init__(self, view):
+        self.view = view
 
     def StartScan(self):
-        print("Nothing to scan.")
+        view.print("Nothing to scan.")
 
     
