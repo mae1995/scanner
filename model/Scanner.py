@@ -5,7 +5,7 @@ class Scanner:
     def __init__(self, view):
         self.view = view
 
-    def StartScan(self):
+    def StartFullScan(self):
         view.print("Nothing to scan.")
 
     
