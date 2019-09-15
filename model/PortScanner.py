@@ -3,8 +3,8 @@ from model.Scanner import Scanner
 
 class PortScanner(Scanner):
 
-    def __init__(self, view, target):
-        Scanner.__init__(self, view)
+    def __init__(self, target):
+        Scanner.__init__(self)
 
         self.target       = target
         self.targetIP     = socket.gethostbyname(target)
@@ -13,18 +13,14 @@ class PortScanner(Scanner):
         self.target       = target
         self.targetIP     = socket.gethostbyname(target)
 
-    def StartFullScan(self, fromPort, toPort):
-        view = self.view
-
+    def StartScan(self, port):
         try:
-            for port in range (fromPort, toPort):
-                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                result = sock.connect_ex((self.targetIP, port))
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            result = sock.connect_ex((self.targetIP, port))
+            sock.close()
 
-                view.PrintBooleanRow("Port :" + str(port), (result == 0), ["OPEN", "CLOSE"])
-
-                sock.close()
+            return {'port': port, 'result' : result}
         except Exception:
-            view.Print("There was an error.")
+            return None
 
 
